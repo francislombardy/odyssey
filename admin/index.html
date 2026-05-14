@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Odyssey Admin | Cape Living Submissions</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Protected Odyssey admin dashboard for Cape Living business submissions, creator submissions and partnership enquiries.">
+  <meta name="theme-color" content="#0B0B0B">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <a class="brand" href="/" aria-label="Odyssey home">ODYSSEY</a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" data-menu-toggle>
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__line"></span>
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <ul class="nav-menu" id="primary-menu" data-menu>
+        <li><a href="/">Website</a></li>
+        <li><a href="/cape-living/">Cape Living</a></li>
+        <li><a href="/cape-living/get-featured/">Business Form</a></li>
+        <li><a href="/cape-living/creators/">Creator Form</a></li>
+        <li><a href="/cape-living/partners/">Partner Form</a></li>
+      </ul>
+    </nav>
+    <button class="button button--outline header-cta" type="button" data-admin-logout hidden>Log out <span aria-hidden="true">-></span></button>
+  </header>
+
+  <main id="main" class="admin-page" data-admin-dashboard>
+    <section class="page-hero section-surface admin-hero" aria-labelledby="admin-title">
+      <div class="page-hero__copy">
+        <p class="overline">Odyssey admin</p>
+        <h1 id="admin-title">Cape Living submissions tracker.</h1>
+        <p class="hero__text">View and manage Odyssey contact leads, Cape Living business submissions, creator submissions, and partnership enquiries collected through the Odyssey website.</p>
+      </div>
+    </section>
+
+    <section class="admin-auth section-surface" data-admin-auth aria-labelledby="admin-login-title">
+      <form class="lead-form auth-card" data-admin-login novalidate>
+        <div class="lead-form__header">
+          <p class="section-kicker">Protected access</p>
+          <h2 id="admin-login-title">Admin login</h2>
+          <p>Submissions and uploaded media are only loaded after authentication.</p>
+        </div>
+        <label>
+          <span>Password</span>
+          <input type="password" name="password" autocomplete="current-password" required>
+        </label>
+        <div class="form-footer">
+          <p class="form-status" aria-live="polite" data-form-status></p>
+          <button class="button button--dark" type="submit">Log in <span aria-hidden="true">-></span></button>
+        </div>
+      </form>
+    </section>
+
+    <section class="admin-shell section-surface" data-admin-panel hidden>
+      <div class="admin-toolbar">
+        <div>
+          <p class="section-kicker">CRM</p>
+          <h2>Submissions</h2>
+        </div>
+        <div class="admin-tabs" role="tablist" aria-label="Odyssey and Cape Living submission sections">
+          <button class="admin-tab is-active" type="button" role="tab" aria-selected="true" data-admin-tab="contacts">General enquiries</button>
+          <button class="admin-tab" type="button" role="tab" aria-selected="false" data-admin-tab="business">Business submissions</button>
+          <button class="admin-tab" type="button" role="tab" aria-selected="false" data-admin-tab="creators">Creator submissions</button>
+          <button class="admin-tab" type="button" role="tab" aria-selected="false" data-admin-tab="partners">Partnership enquiries</button>
+        </div>
+      </div>
+
+      <div class="admin-summary-grid" aria-label="Submission totals">
+        <article><span data-admin-count="contacts">0</span><p>General enquiries</p></article>
+        <article><span data-admin-count="business">0</span><p>Business submissions</p></article>
+        <article><span data-admin-count="creators">0</span><p>Creator submissions</p></article>
+        <article><span data-admin-count="partners">0</span><p>Partnership enquiries</p></article>
+      </div>
+
+      <div class="admin-table-panel" data-admin-table-panel>
+        <div class="admin-table-status" data-admin-table-status aria-live="polite">Loading submissions...</div>
+        <div class="admin-table-wrap" data-admin-table></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__brand">
+      <a class="brand brand--footer" href="/">ODYSSEY</a>
+      <p>Admin access for Odyssey-owned Cape Living submissions.</p>
+    </div>
+    <nav class="site-footer__nav" aria-label="Footer navigation">
+      <a href="/">Home</a>
+      <a href="/cape-living/">Cape Living</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+    </nav>
+    <div class="site-footer__contact">
+      <a href="mailto:hello@theodysseymag.co.za">hello@theodysseymag.co.za</a>
+      <a href="https://theodysseymag.co.za/" target="_blank" rel="noopener">theodysseymag.co.za</a>
+    </div>
+    <p class="site-footer__bottom">&copy; <span data-year>2026</span> Odyssey. Owner of Cape Living. All rights reserved.</p>
+  </footer>
+
+  <script src="/script.js" defer></script>
+</body>
+</html>

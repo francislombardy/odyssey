@@ -1,0 +1,315 @@
+{
+  "generatedAt": "2026-05-14T14:15:19.222Z",
+  "scriptVersion": 1,
+  "sourceDirectory": "images/videos",
+  "optimizedDirectory": "images/optimized-videos",
+  "posterDirectory": "images/video-posters",
+  "settings": {
+    "widths": [
+      1080,
+      720
+    ],
+    "mp4": {
+      "codec": "h264",
+      "crf": 25,
+      "preset": "medium",
+      "audio": "removed",
+      "fastStart": true
+    },
+    "webm": null,
+    "poster": {
+      "format": "jpg",
+      "width": 1080
+    }
+  },
+  "videos": {
+    "images/videos/1110.mp4": {
+      "source": "images/videos/1110.mp4",
+      "sourceSize": 44982716,
+      "sourceSizeMb": 42.9,
+      "sourceMtimeMs": 1762833934461,
+      "sourceTooLarge": true,
+      "settingsHash": "089d6d1876aa2f4f6a01b58296c2eca63991576149da0ecb2112968c2e7e28f9",
+      "metadata": {
+        "width": 720,
+        "height": 1280,
+        "duration": 35.922,
+        "bitRate": 10017864,
+        "videoCodec": "h264",
+        "hasAudio": true
+      },
+      "poster": {
+        "src": "images/video-posters/1110-89696717.jpg",
+        "size": 78856,
+        "sizeMb": 0.08
+      },
+      "outputs": {
+        "mp4_720": {
+          "src": "images/optimized-videos/1110-89696717-720.mp4",
+          "format": "mp4",
+          "width": 720,
+          "size": 11154754,
+          "sizeMb": 10.64,
+          "tooLarge": true
+        }
+      }
+    },
+    "images/videos/1119.mp4": {
+      "source": "images/videos/1119.mp4",
+      "sourceSize": 19842193,
+      "sourceSizeMb": 18.92,
+      "sourceMtimeMs": 1778705885455,
+      "sourceTooLarge": true,
+      "settingsHash": "089d6d1876aa2f4f6a01b58296c2eca63991576149da0ecb2112968c2e7e28f9",
+      "metadata": {
+        "width": 720,
+        "height": 1280,
+        "duration": 57.168,
+        "bitRate": 2776685,
+        "videoCodec": "h264",
+        "hasAudio": true
+      },
+      "poster": {
+        "src": "images/video-posters/1119-46afab74.jpg",
+        "size": 72434,
+        "sizeMb": 0.07
+      },
+      "outputs": {
+        "mp4_720": {
+          "src": "images/optimized-videos/1119-46afab74-720.mp4",
+          "format": "mp4",
+          "width": 720,
+          "size": 13709633,
+          "sizeMb": 13.07,
+          "tooLarge": true
+        }
+      }
+    },
+    "images/videos/RODIZIO TRIAL VID.mp4": {
+      "source": "images/videos/RODIZIO TRIAL VID.mp4",
+      "sourceSize": 15279397,
+      "sourceSizeMb": 14.57,
+      "sourceMtimeMs": 1778705894862,
+      "sourceTooLarge": false,
+      "settingsHash": "089d6d1876aa2f4f6a01b58296c2eca63991576149da0ecb2112968c2e7e28f9",
+      "metadata": {
+        "width": 1080,
+        "height": 1920,
+        "duration": 30.07,
+        "bitRate": 4065020,
+        "videoCodec": "h264",
+        "hasAudio": true
+      },
+      "poster": {
+        "src": "images/video-posters/rodizio-trial-vid-e55ef02f.jpg",
+        "size": 49823,
+        "sizeMb": 0.05
+      },
+      "outputs": {
+        "mp4_1080": {
+          "src": "images/optimized-videos/rodizio-trial-vid-e55ef02f-1080.mp4",
+          "format": "mp4",
+          "width": 1080,
+          "size": 10913798,
+          "sizeMb": 10.41,
+          "tooLarge": true
+        },
+        "mp4_720": {
+          "src": "images/optimized-videos/rodizio-trial-vid-e55ef02f-720.mp4",
+          "format": "mp4",
+          "width": 720,
+          "size": 4737906,
+          "sizeMb": 4.52,
+          "tooLarge": false
+        }
+      }
+    },
+    "images/videos/UO HOTEL ROOM.mp4": {
+      "source": "images/videos/UO HOTEL ROOM.mp4",
+      "sourceSize": 47430014,
+      "sourceSizeMb": 45.23,
+      "sourceMtimeMs": 1778705866780,
+      "sourceTooLarge": true,
+      "settingsHash": "089d6d1876aa2f4f6a01b58296c2eca63991576149da0ecb2112968c2e7e28f9",
+      "metadata": {
+        "width": 1080,
+        "height": 1920,
+        "duration": 89.837,
+        "bitRate": 4223650,
+        "videoCodec": "h264",
+        "hasAudio": true
+      },
+      "poster": {
+        "src": "images/video-posters/uo-hotel-room-b8154d35.jpg",
+        "size": 167755,
+        "sizeMb": 0.16
+      },
+      "outputs": {
+        "mp4_1080": {
+          "src": "images/optimized-videos/uo-hotel-room-b8154d35-1080.mp4",
+          "format": "mp4",
+          "width": 1080,
+          "size": 35209972,
+          "sizeMb": 33.58,
+          "tooLarge": true
+        },
+        "mp4_720": {
+          "src": "images/optimized-videos/uo-hotel-room-b8154d35-720.mp4",
+          "format": "mp4",
+          "width": 720,
+          "size": 15904103,
+          "sizeMb": 15.17,
+          "tooLarge": true
+        }
+      }
+    },
+    "images/videos/Urban - Nat checkin.mp4": {
+      "source": "images/videos/Urban - Nat checkin.mp4",
+      "sourceSize": 135429876,
+      "sourceSizeMb": 129.16,
+      "sourceMtimeMs": 1758647337531,
+      "sourceTooLarge": true,
+      "settingsHash": "089d6d1876aa2f4f6a01b58296c2eca63991576149da0ecb2112968c2e7e28f9",
+      "metadata": {
+        "width": 3840,
+        "height": 2160,
+        "duration": 44.219,
+        "bitRate": 24501662,
+        "videoCodec": "h264",
+        "hasAudio": true
+      },
+      "poster": {
+        "src": "images/video-posters/urban-nat-checkin-e6382fc3.jpg",
+        "size": 35593,
+        "sizeMb": 0.03
+      },
+      "outputs": {
+        "mp4_1080": {
+          "src": "images/optimized-videos/urban-nat-checkin-e6382fc3-1080.mp4",
+          "format": "mp4",
+          "width": 1080,
+          "size": 4356794,
+          "sizeMb": 4.15,
+          "tooLarge": false
+        },
+        "mp4_720": {
+          "src": "images/optimized-videos/urban-nat-checkin-e6382fc3-720.mp4",
+          "format": "mp4",
+          "width": 720,
+          "size": 1996665,
+          "sizeMb": 1.9,
+          "tooLarge": false
+        }
+      }
+    },
+    "images/videos/urbanbrunchbuffet.mp4": {
+      "source": "images/videos/urbanbrunchbuffet.mp4",
+      "sourceSize": 32698136,
+      "sourceSizeMb": 31.18,
+      "sourceMtimeMs": 1778744635437,
+      "sourceTooLarge": true,
+      "settingsHash": "089d6d1876aa2f4f6a01b58296c2eca63991576149da0ecb2112968c2e7e28f9",
+      "metadata": {
+        "width": 720,
+        "height": 1280,
+        "duration": 59.232,
+        "bitRate": 4416279,
+        "videoCodec": "h264",
+        "hasAudio": true
+      },
+      "poster": {
+        "src": "images/video-posters/urbanbrunchbuffet-9761c778.jpg",
+        "size": 72342,
+        "sizeMb": 0.07
+      },
+      "outputs": {
+        "mp4_720": {
+          "src": "images/optimized-videos/urbanbrunchbuffet-9761c778-720.mp4",
+          "format": "mp4",
+          "width": 720,
+          "size": 16842941,
+          "sizeMb": 16.06,
+          "tooLarge": true
+        }
+      }
+    },
+    "images/videos/VIC KING VID.mp4": {
+      "source": "images/videos/VIC KING VID.mp4",
+      "sourceSize": 77142191,
+      "sourceSizeMb": 73.57,
+      "sourceMtimeMs": 1771772005759,
+      "sourceTooLarge": true,
+      "settingsHash": "089d6d1876aa2f4f6a01b58296c2eca63991576149da0ecb2112968c2e7e28f9",
+      "metadata": {
+        "width": 2160,
+        "height": 3840,
+        "duration": 21.502,
+        "bitRate": 28701401,
+        "videoCodec": "h264",
+        "hasAudio": true
+      },
+      "poster": {
+        "src": "images/video-posters/vic-king-vid-5cac7ac8.jpg",
+        "size": 88916,
+        "sizeMb": 0.08
+      },
+      "outputs": {
+        "mp4_1080": {
+          "src": "images/optimized-videos/vic-king-vid-5cac7ac8-1080.mp4",
+          "format": "mp4",
+          "width": 1080,
+          "size": 8332742,
+          "sizeMb": 7.95,
+          "tooLarge": false
+        },
+        "mp4_720": {
+          "src": "images/optimized-videos/vic-king-vid-5cac7ac8-720.mp4",
+          "format": "mp4",
+          "width": 720,
+          "size": 3852480,
+          "sizeMb": 3.67,
+          "tooLarge": false
+        }
+      }
+    },
+    "images/videos/VID AD 1.mp4": {
+      "source": "images/videos/VID AD 1.mp4",
+      "sourceSize": 9823277,
+      "sourceSizeMb": 9.37,
+      "sourceMtimeMs": 1778705871008,
+      "sourceTooLarge": false,
+      "settingsHash": "089d6d1876aa2f4f6a01b58296c2eca63991576149da0ecb2112968c2e7e28f9",
+      "metadata": {
+        "width": 1280,
+        "height": 720,
+        "duration": 27.609,
+        "bitRate": 2846398,
+        "videoCodec": "h264",
+        "hasAudio": true
+      },
+      "poster": {
+        "src": "images/video-posters/vid-ad-1-726d98a8.jpg",
+        "size": 44311,
+        "sizeMb": 0.04
+      },
+      "outputs": {
+        "mp4_1080": {
+          "src": "images/optimized-videos/vid-ad-1-726d98a8-1080.mp4",
+          "format": "mp4",
+          "width": 1080,
+          "size": 5143517,
+          "sizeMb": 4.91,
+          "tooLarge": false
+        },
+        "mp4_720": {
+          "src": "images/optimized-videos/vid-ad-1-726d98a8-720.mp4",
+          "format": "mp4",
+          "width": 720,
+          "size": 2811366,
+          "sizeMb": 2.68,
+          "tooLarge": false
+        }
+      }
+    }
+  }
+}

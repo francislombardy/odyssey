@@ -1,0 +1,7 @@
+node_modules/
+.odyssey-data/
+.env
+npm-debug.log*
+images/videos/
+images/optimized-videos/
+images/video-posters/
