@@ -202,3 +202,23 @@ Before production launch:
 - Existing portfolio media remains in the local `images` folder.
 - Portfolio videos use poster images, `preload="none"`, deferred source loading, and one-video-at-a-time playback.
 - Opening HTML files directly will not submit forms. Run the Node server for forms, uploads, admin, and tracking.
+
+## Committing Videos (Git & Git LFS)
+
+The repository previously ignored the local video assets under `images/`. I removed those ignore rules and added a `.gitattributes` file to recommend using Git LFS for large media files.
+
+Recommended steps to add and push video assets (run from the project root):
+
+```bash
+git lfs install
+git add .gitattributes
+git add images/videos
+git add images/optimized-videos
+git add images/video-posters
+git commit -m "Add portfolio videos and enable Git LFS tracking"
+git push
+```
+
+If you prefer not to use Git LFS, skip `git lfs install` and `.gitattributes`, but be aware that adding large raw video files will increase your repository size.
+
+Note: `.env` remains ignored for security; do not commit it.

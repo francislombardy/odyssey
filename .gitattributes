@@ -1,0 +1,11 @@
+# Use Git LFS for common video formats and generated posters
+images/videos/* filter=lfs diff=lfs merge=lfs -text
+optimized-videos/* filter=lfs diff=lfs merge=lfs -text
+images/optimized-videos/* filter=lfs diff=lfs merge=lfs -text
+images/video-posters/* filter=lfs diff=lfs merge=lfs -text
+videos/* filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mov filter=lfs diff=lfs merge=lfs -text
+*.webm filter=lfs diff=lfs merge=lfs -text
+*.mkv filter=lfs diff=lfs merge=lfs -text
+*.avi filter=lfs diff=lfs merge=lfs -text
