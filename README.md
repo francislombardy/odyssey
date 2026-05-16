@@ -6,11 +6,11 @@ Cape Living is implemented inside the Odyssey website for early outreach and lea
 
 ## Project Type
 
-This is a Node/Express website serving static HTML, CSS, and JavaScript. It is not Vite, React, or Next.js.
+This is a static HTML, CSS, and JavaScript website with an Express/Supabase API. Locally, Express serves the whole site. On Netlify, static files are served from the project root and `/api/*` requests are routed to a Netlify Function that wraps the same Express app. It is not Vite, React, or Next.js.
 
 - Start command: `npm start`
 - Build command: none required
-- Publish/output folder: none for static hosting; deploy as a Node service from the project root
+- Netlify publish folder: `.`
 - Local default URL: `http://127.0.0.1:4173/`
 
 ## Run Locally
@@ -175,14 +175,14 @@ Recommended source guidance:
 
 ## Deployment
 
-Deploy this project as a Node/Express app, not as a static-only site.
+Deploy this project to Netlify with Functions enabled. The `netlify.toml` file routes `/api/*` to `netlify/functions/api.js`, which loads the Express/Supabase backend from `server.js`.
 
 Recommended deployment settings:
 
 - Install command: `npm install`
-- Build command: leave blank, or use `npm install` only if the host requires a build field
-- Start command: `npm start`
-- Output/publish directory: not used
+- Build command: leave blank
+- Publish directory: `.`
+- Functions directory: `netlify/functions`
 - Environment: add all required variables from `.env.example`
 
 Before production launch:
@@ -190,7 +190,7 @@ Before production launch:
 1. Run `supabase/odyssey_supabase_setup.sql` in the target Supabase project.
 2. Confirm the four upload buckets exist and are private.
 3. Set `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_PUBLISHABLE_KEY` or `SUPABASE_ANON_KEY`, `ADMIN_PASSWORD`, and `ADMIN_SECRET`.
-4. Start the server with `npm start`.
+4. Deploy to Netlify, then confirm `/api/admin/session` returns JSON.
 5. Submit each form and confirm the rows appear in `/admin/`.
 6. Upload test media and confirm admin media links open after login.
 7. Update a submission status and notes, then refresh admin to confirm the update saved.

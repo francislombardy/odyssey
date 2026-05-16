@@ -11,7 +11,8 @@ require("dotenv").config();
 
 const ROOT_DIR = __dirname;
 const PORT = Number(process.env.PORT || 4173);
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "odyssey-admin-2026";
+const IS_PRODUCTION = process.env.NODE_ENV === "production" || process.env.NETLIFY === "true";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || (IS_PRODUCTION ? "" : "odyssey-admin-2026");
 const ADMIN_SECRET =
   process.env.ADMIN_SECRET ||
   crypto.createHash("sha256").update(`${ADMIN_PASSWORD}:odyssey-admin-secret`).digest("hex");
@@ -85,6 +86,18 @@ const supabase =
     : null;
 
 app.disable("x-powered-by");
+app.set("trust proxy", 1);
+app.use((req, _res, next) => {
+  const functionBasePath = "/.netlify/functions/api";
+
+  if (req.url === functionBasePath) {
+    req.url = "/api";
+  } else if (req.url.startsWith(`${functionBasePath}/`)) {
+    req.url = `/api/${req.url.slice(functionBasePath.length + 1)}`;
+  }
+
+  next();
+});
 app.use(
   helmet({
     contentSecurityPolicy: false,
@@ -114,6 +127,20 @@ if (allowedOrigins.length) {
 } else {
   app.use(cors({ origin: true, credentials: true }));
 }
+
+const requestClientKey = (req) => {
+  const headerValue =
+    req.headers["x-nf-client-connection-ip"] ||
+    req.headers["x-real-ip"] ||
+    req.headers["x-forwarded-for"] ||
+    req.socket?.remoteAddress ||
+    "unknown";
+
+  return String(Array.isArray(headerValue) ? headerValue[0] : headerValue)
+    .split(",")[0]
+    .trim() || "unknown";
+};
+
 app.use(express.json({ limit: "100kb" }));
 app.use(express.urlencoded({ extended: true, limit: "100kb" }));
 app.use((err, _req, res, next) => {
@@ -126,6 +153,7 @@ app.use((err, _req, res, next) => {
 const submissionLimiter = rateLimit({
   windowMs: 60 * 60 * 1000,
   limit: 18,
+  keyGenerator: requestClientKey,
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: "Too many submissions from this connection. Please try again later." }
@@ -134,6 +162,7 @@ const submissionLimiter = rateLimit({
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 20,
+  keyGenerator: requestClientKey,
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: "Too many login attempts. Please try again shortly." }
@@ -142,6 +171,7 @@ const authLimiter = rateLimit({
 const trackingLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 180,
+  keyGenerator: requestClientKey,
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: "Tracking limit reached." }
@@ -481,7 +511,7 @@ const mediaForRows = async (submissionType, rows) => {
       mimeType: file.mime_type,
       bucket: file.bucket,
       objectPath: file.object_path,
-      url: `/admin/uploads/${file.id}`
+      url: `/api/admin/uploads/${file.id}`
     });
   });
 
@@ -508,6 +538,10 @@ const runMulter = (upload, req, res) =>
   });
 
 app.post("/api/admin/login", authLimiter, (req, res) => {
+  if (!ADMIN_PASSWORD) {
+    return res.status(503).json({ error: "Admin password is not configured." });
+  }
+
   if (!samePassword(req.body.password)) {
     return res.status(401).json({ error: "Incorrect admin password." });
   }
@@ -918,29 +952,28 @@ app.post(
   })
 );
 
-app.get(
-  "/admin/uploads/:id",
-  requireAdmin,
-  handleAsync(async (req, res) => {
-    if (!requireSupabase(res)) return;
+const serveAdminUpload = handleAsync(async (req, res) => {
+  if (!requireSupabase(res)) return;
 
-    const { data: file, error } = await supabase
-      .from("media_files")
-      .select("*")
-      .eq("id", safeText(req.params.id))
-      .single();
-    if (error || !file) {
-      return res.status(404).json({ error: "Upload not found." });
-    }
+  const { data: file, error } = await supabase
+    .from("media_files")
+    .select("*")
+    .eq("id", safeText(req.params.id))
+    .single();
+  if (error || !file) {
+    return res.status(404).json({ error: "Upload not found." });
+  }
 
-    const { data, error: signedUrlError } = await supabase.storage
-      .from(file.bucket)
-      .createSignedUrl(file.object_path, 5 * 60);
-    if (signedUrlError) throw signedUrlError;
+  const { data, error: signedUrlError } = await supabase.storage
+    .from(file.bucket)
+    .createSignedUrl(file.object_path, 5 * 60);
+  if (signedUrlError) throw signedUrlError;
 
-    return res.redirect(data.signedUrl);
-  })
-);
+  return res.redirect(data.signedUrl);
+});
+
+app.get("/admin/uploads/:id", requireAdmin, serveAdminUpload);
+app.get("/api/admin/uploads/:id", requireAdmin, serveAdminUpload);
 
 const sendHtml = (res, filePath) => res.sendFile(path.join(ROOT_DIR, filePath));
 
@@ -971,18 +1004,24 @@ app.use((_req, res) => {
   res.status(404).sendFile(path.join(ROOT_DIR, "index.html"));
 });
 
-app.listen(PORT, () => {
-  if (!process.env.ADMIN_PASSWORD) {
-    console.warn("Using default ADMIN_PASSWORD. Set ADMIN_PASSWORD before production deployment.");
-  }
-  if (!process.env.ADMIN_SECRET) {
-    console.warn("Using derived ADMIN_SECRET. Set ADMIN_SECRET before production deployment.");
-  }
-  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-    console.warn("Supabase is not configured. Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY for submissions.");
-  }
-  if (!SUPABASE_PUBLIC_KEY) {
-    console.warn("SUPABASE_PUBLISHABLE_KEY or SUPABASE_ANON_KEY is not set. The server does not expose it, but keep it available for deployment parity.");
-  }
-  console.log(`Odyssey website running at http://127.0.0.1:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    if (!ADMIN_PASSWORD) {
+      console.warn("ADMIN_PASSWORD is not set. Admin login is disabled.");
+    } else if (!process.env.ADMIN_PASSWORD) {
+      console.warn("Using default ADMIN_PASSWORD. Set ADMIN_PASSWORD before production deployment.");
+    }
+    if (!process.env.ADMIN_SECRET) {
+      console.warn("Using derived ADMIN_SECRET. Set ADMIN_SECRET before production deployment.");
+    }
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+      console.warn("Supabase is not configured. Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY for submissions.");
+    }
+    if (!SUPABASE_PUBLIC_KEY) {
+      console.warn("SUPABASE_PUBLISHABLE_KEY or SUPABASE_ANON_KEY is not set. The server does not expose it, but keep it available for deployment parity.");
+    }
+    console.log(`Odyssey website running at http://127.0.0.1:${PORT}`);
+  });
+}
+
+module.exports = { app };
