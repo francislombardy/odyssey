@@ -4,6 +4,7 @@ const path = require("node:path");
 const { createClient } = require("@supabase/supabase-js");
 const express = require("express");
 const helmet = require("helmet");
+const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const multer = require("multer");
 require("dotenv").config();
@@ -90,6 +91,29 @@ app.use(
     crossOriginEmbedderPolicy: false
   })
 );
+
+// Configure CORS to allow front-end hosts to submit forms directly to this API.
+// Set ALLOWED_ORIGINS to a comma-separated list of allowed origins (e.g. https://yoursite.netlify.app).
+// If ALLOWED_ORIGINS is not set, CORS will allow all origins.
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+if (allowedOrigins.length) {
+  app.use(
+    cors({
+      origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) return callback(null, true);
+        return callback(new Error("Not allowed by CORS"));
+      },
+      credentials: true
+    })
+  );
+} else {
+  app.use(cors({ origin: true, credentials: true }));
+}
 app.use(express.json({ limit: "100kb" }));
 app.use(express.urlencoded({ extended: true, limit: "100kb" }));
 app.use((err, _req, res, next) => {
