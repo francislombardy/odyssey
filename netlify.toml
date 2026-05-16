@@ -9,6 +9,11 @@
   node_bundler = "esbuild"
 
 [[redirects]]
+  from = "/lander"
+  to = "/"
+  status = 301
+
+[[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api/:splat"
   status = 200
